@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+ 
+    <link rel="stylesheet" href="css/animate.css">
+    
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
+
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .loader-container {
+            display: flex;
+            justify-content: center;
+        }
+        .loader {
+        width: 50px;
+        aspect-ratio: 1;
+        display: grid;
+        border: 4px solid #0000;
+        border-radius: 50%;
+        border-right-color: #25b09b;
+        animation: l15 1s infinite linear;
+        }
+        .loader::before,
+        .loader::after {    
+        content: "";
+        grid-area: 1/1;
+        margin: 2px;
+        border: inherit;
+        border-radius: 50%;
+        animation: l15 2s infinite;
+        }
+        .loader::after {
+        margin: 8px;
+        animation-duration: 3s;
+        }
+        @keyframes l15{ 
+        100%{transform: rotate(1turn)}
+        }
+
+        /* show */
+        .product-item {
+            opacity: 0; /* Ẩn ban đầu */
+            transform: translateY(-20px); /* Dịch lên 20px */
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .product-item.show {
+            opacity: 1; /* Hiển thị */
+            transform: translateY(0); /* Trở về vị trí ban đầu */
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 d-flex align-items-center">
+					<p class="mb-0 phone pl-md-2">
+						<a href="tel:+84795777607" class="mr-2"><span class="fa fa-phone mr-1"></span> 0795.777.607</a>
+						<a href="#"><span class="fa fa-paper-plane mr-1"></span> hthanh1192@gmail.com</a>
+					</p>
+				</div>
+				<div class="col-md-6 d-flex justify-content-md-end">
+					<div class="social-media">
+						<p class="mb-0 d-flex">
+							<a href="https://fb.com/thanhmomer"
+								class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"><i
+										class="sr-only">Facebook</i></span></a>
+							<a href="#" class="d-flex align-items-center justify-content-center"><span
+									class="fa fa-twitter"><i class="sr-only">Twitter</i></span></a>
+							<a href="#" class="d-flex align-items-center justify-content-center"><span
+									class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a>
+							<a href="#" class="d-flex align-items-center justify-content-center"><span
+									class="fa fa-dribbble"><i class="sr-only">Dribbble</i></span></a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light  sticky-top container-fluid"
+		id="ftco-navbar">
+		<div class="container">
+			<a class="navbar-brand" href="index.html"><span class="flaticon-pawprint-1 mr-2"></span>Chào Mào MOMER</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+				aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="fa fa-bars"></span> Menu
+			</button>
+			<div class="collapse navbar-collapse" id="ftco-nav">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active"><a href="index.html" class="nav-link">Trang Chủ</a></li>
+					<li class="nav-item"><a href="/index.html#kenhTikTok" class="nav-link"> TIKTOK MOMER</a></li>
+					<li class="nav-item"><a href="/index.html#dichVu" class="nav-link">Dịch Vụ</a></li>
+					<li class="nav-item"><a href="#" class="nav-link">Phụ kiên Chào Mào</a></li>
+					<li class="nav-item"><a href="/index.html#bangGia" class="nav-link">Bảng Giá</a></li>
+					<li class="nav-item"><a href="/index.html#" class="nav-link">Blog</a></li>
+					<li class="nav-item"><a href="/index.html#lienHe" class="nav-link">Liên Hệ</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+    <!-- end nav -->
+
+    <section class="filter">
+        <div class="container">
+            <div class="filter-item filter-province">
+                <p><i class="fa fa-map-marker" aria-hidden="true"></i> Khu vực:</p>
+                <select name="" id="" class="filter-province-list"></select>
+            </div>
+            <div class="filter-item filter-status">
+                <p><i class="fa fa-check-circle-o" aria-hidden="true"></i> Tình trạng:</p>
+                <select name="" id="" class="filter-status-list">
+                    <option value="">Mới</option>
+                    <option value="">Đã sử dụng</option>
+                </select>
+            </div>
+            <div class="filter-item filter-btn">
+                <button><i class="fa fa-filter" aria-hidden="true"></i> Lọc</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="listProduct">
+        <div class="container" id="product-list">
+            <!-- loader -->
+             <div class="loader-container">
+                <div class="loader"></div>
+            </div>
+            <!-- <div class="product-item">
+                <div class="product-item-left">
+                    <img src="images/cage.jpg" alt="">
+                </div>
+                <div class="product-item-right">
+                    <h3 class="product-name">Thanh lý lồng chim như hình</h3>
+                    <p class="product-status">Đã sử dụng</p>
+                    <p class="product-price">100.000 ₫</p>
+                    <div class="product-location-time">
+                        <span class="product-location"><i class="fa fa-map-marker" aria-hidden="true"></i> Thành phố Hồ Chí Minh</span>
+                        <span class="product-time">5 ngày trước</span>
+                    </div>
+                    <div class="product-rate-sold">
+                        <span class="product-rate">
+                            4.3 <i class="fa fa-star" style="color: var(--yellow);"></i>
+                        </span>
+                        <span class="product-sold">Đã bán: 50</span>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </section>
+
+    <footer class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+					<h2 class="footer-heading">Chăm Sóc Chim Chào Mào</h2>
+					<p>Một dòng sông nhỏ tên Duden chảy qua nơi họ sống và cung cấp nguồn nước dồi dào.</p>
+					<ul class="ftco-footer-social p-0">
+						<li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+						<li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><span class="fa fa-facebook"></span></a></li>
+						<li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><span class="fa fa-instagram"></span></a></li>
+					</ul>
+				</div>
+				<div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+					<h2 class="footer-heading">Tin Tức Mới Nhất</h2>
+					<div class="block-21 mb-4 d-flex">
+						<a class="img mr-4 rounded" style="background-image: url(images/image_1.jpg);"></a>
+						<div class="text">
+							<h3 class="heading"><a href="#">Cách chăm sóc chim chào mào tốt nhất</a></h3>
+							<div class="meta">
+								<div><a href="#"><span class="icon-calendar"></span> 07/04/2023</a></div>
+								<div><a href="#"><span class="icon-person"></span> Admin</a></div>
+								<div><a href="#"><span class="icon-chat"></span> 19</a></div>
+							</div>
+						</div>
+					</div>
+					<div class="block-21 mb-4 d-flex">
+						<a class="img mr-4 rounded" style="background-image: url(images/image_2.jpg);"></a>
+						<div class="text">
+							<h3 class="heading"><a href="#">Những lưu ý khi huấn luyện chim chào mào</a></h3>
+							<div class="meta">
+								<div><a href="#"><span class="icon-calendar"></span> 07/04/2023</a></div>
+								<div><a href="#"><span class="icon-person"></span> Admin</a></div>
+								<div><a href="#"><span class="icon-chat"></span> 19</a></div>
+							</div>
+						</div>
+					
+				</div>
+					</div>
+					<div class="col-md-6 col-lg-3 pl-lg-5 mb-4 mb-md-0">
+						<h2 class="footer-heading">Menu nhanh</h2>
+						<ul class="list-unstyled">
+              <li><a href="#" class="py-2 d-block">Trang Chủ</a></li>
+              <li><a href="#" class="py-2 d-block">Giới Thiệu</a></li>
+              <li><a href="#" class="py-2 d-block">Dịch Vụ</a></li>
+              <li><a href="#" class="py-2 d-block">Công việc</a></li>
+              <li><a href="#" class="py-2 d-block">Blog</a></li>
+              <li><a href="#" class="py-2 d-block">Liên Hệ</a></li>
+            </ul>
+					</div>
+					<div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+						<h2 class="footer-heading">Ban cần hỏi?</h2>
+						<div class="block-23 mb-3">
+              <ul>
+                <li><span class="icon fa fa-map"></span><span class="text">K82 Nguyễn Lương Băng, Tp. Đà Nẵng</span></li>
+                <li><a href="#"><span class="icon fa fa-phone"></span><span class="text">0785.777.607</span></a></li>
+                <li><a href="#"><span class="icon fa fa-paper-plane"></span><span class="text">hthanh1192@gmail.com</span></a></li>
+              </ul>
+            </div>
+					</div>
+				</div>
+				<div class="row mt-5">
+          <div class="col-md-12 text-center">
+
+            <p class="copyright"><!-- Link back to momer can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> Bản quyền thuộc MOMER <i class="fa fa-heart" aria-hidden="true"></i> by <a href="http://momer.my" target="_blank">momer.my</a>
+  <!-- Link back to momer can't be removed. Template is licensed under CC BY 3.0. --></p>
+          </div>
+        </div>
+			</div>
+		</footer>
+
+    <!-- render product -->
+    <script>
+        const apiURL = "https://v1.nocodeapi.com/sungga/google_sheets/BnHDsAPPcnyNlolD?tabId=products";
+    
+        async function getDataAPI() {
+            try {
+                const response = await fetch(apiURL);
+                if (!response.ok) {
+                    throw new Error(`Lỗi: ${response.status}`);
+                }
+                const jsonData = await response.json();
+                return jsonData.data || []; // Lấy mảng sản phẩm từ JSON
+            } catch (error) {
+                console.error("Lỗi khi gọi API:", error);
+                return [];
+            }
+        }
+    
+        async function renderProducts() {
+            const productList = document.getElementById("product-list");
+    
+            const products = await getDataAPI();
+            productList.innerHTML = ""; // Xóa nội dung cũ
+    
+            products.forEach((product, index) => {
+                const productDiv = document.createElement("div");
+                productDiv.classList.add("product-item");
+                productDiv.style.opacity = "0"; // Ẩn ban đầu
+                productDiv.style.transform = "translateY(-20px)"; // Dịch lên trên
+                productDiv.style.transition = "opacity 0.5s ease-out, transform 0.5s ease-out";
+    
+                productDiv.innerHTML = `
+                    <div class="product-item-left">
+                        <img src="${product['Ảnh'].trim()}" alt="${product['Tên sản phẩm']}">
+                    </div>
+                    <div class="product-item-right">
+                        <h3 class="product-name">${product['Tên sản phẩm']}</h3>
+                        <p class="product-status">${product['Tình trạng']}</p>
+                        <p class="product-price">${product['Giá']}</p>
+                        <div class="product-location-time">
+                            <span class="product-location">
+                                <i class="fa fa-map-marker" aria-hidden="true"></i> ${product['Địa điểm']}
+                            </span>
+                            <span class="product-time">${product['Thời gian']}</span>
+                        </div>
+                        <div class="product-rate-sold">
+                            <span class="product-rate">
+                                ${product['Đánh giá']} <i class="fa fa-star"></i>
+                            </span>
+                            <span class="product-sold">Đã bán: ${product['Đã bán']}</span>
+                        </div>
+                    </div>
+                `;
+    
+                productList.appendChild(productDiv);
+    
+                // Thêm hiệu ứng xuất hiện dần sau một khoảng delay
+                setTimeout(() => {
+                    productDiv.style.opacity = "1";
+                    productDiv.style.transform = "translateY(0)";
+                }, index * 150); // Hiệu ứng xuất hiện từng cái một
+            });
+        }
+    
+        // Gọi hàm hiển thị danh sách sản phẩm
+        renderProducts();
+    </script>
+    
+    <!-- end -->
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/jquery.timepicker.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/scrollax.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="js/google-map.js"></script>
+    <script src="js/main.js"></script>
+
+    <!--  -->
+    <script>
+        const provinceList = document.querySelector(".filter-province-list");
+
+        async function getDataAPI() {
+            const url = "https://provinces.open-api.vn/api/";
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`Lỗi: ${response.status}`);
+                }
+                const data = await response.json();
+                return Array.isArray(data) ? data : []; // Đảm bảo luôn là mảng
+            } catch (error) {
+                console.error("Lỗi khi gọi API:", error);
+                return []; // Trả về mảng rỗng nếu có lỗi
+            }
+        }
+
+        // Gọi và lấy dữ liệu ngay
+        async function getData() {
+            const data = await getDataAPI(); // Lấy dữ liệu
+            // console.log("Mảng dữ liệu:", data);
+            return data;
+        }
+
+        // Tạo selectbox chức năng chọn tỉnh/thành phố
+
+        async function createSelectBox() {
+            const data = await getData(); // Lấy dữ liệu
+
+            for(i = 0; i < data.length; i++) {
+                const option = document.createElement('option');
+                option.value = data[i].codename;
+                option.textContent = data[i].name;
+                provinceList.appendChild(option);
+            }
+        }
+
+        createSelectBox(); // Tạo selectbox ngay khi chạy trang web
+    </script>
+</body>
+</html>
